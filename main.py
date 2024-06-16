@@ -1,8 +1,6 @@
 import csv
 import random
-import statistics
 import numpy
-import tkinter
 
 PRACT_PRCNTIL_THSHLD = 10
 
@@ -11,7 +9,6 @@ def main():
     with open("test.csv", encoding="utf-8-sig") as file:
         transitional_object = csv.DictReader(file)  # read the file 
         for row in transitional_object: #convert every file row into a dictionary with Column names as a keys and cells content as a values. Here 'row' stands for 'dictionary' 
-            #words_dict = {}
             word = row['Word']
             description = row['Description'].strip()
             word_dict = {
@@ -20,7 +17,6 @@ def main():
                 'Practiced': 0,
                 'Known': False
             }
-            #print(word_dict) #for test purposes. to delete later
             flashcards.append(word_dict) #add the edited dictionary to the list consisting of dictionaries - one per every word
         
 
@@ -36,7 +32,6 @@ def main():
     for i in range(want_to_practice):  
         #send initial flashcards list to get a part of it that has higher priority for practice
         prioritized_flashcards = get_prioritized_flashcards(flashcards)
-        print(prioritized_flashcards) #for test purposes. to delete later
         practice_a_word(prioritized_flashcards)
 
 def practice_a_word(list1):
@@ -74,7 +69,6 @@ def get_prioritized_flashcards(initial_list):
     least_practiced = list(filter(lambda x: x['Practiced'] <= practiced_percentile, initial_list))
     # filter out flashcards set as unknown by user
     unknown = list(filter(lambda x: x['Known'] == False and x['Practiced'] > 0, initial_list))
-    print(unknown) #for test purposes. to delete later
     return(least_practiced + unknown) # make up an adjusted list of flashcards to practice first
     
 
